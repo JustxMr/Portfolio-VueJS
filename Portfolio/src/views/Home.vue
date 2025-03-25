@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Modal from '@/components/Modal.vue';
+import emailjs from 'emailjs-com';
 
 // Par défaut les Modals ne sont pas apparente
 const showFirstModal = ref(false);
@@ -14,17 +15,30 @@ const name = ref('');
 const email = ref('');
 const message = ref('');
 
-// On verifie et on valide les données
-const valideData = () => {
-  if (!name.value || !email.value || !message.value) {
-    alert("Veuillez remplir tout les champs de formulaire !")
-  } else {
-    alert("Votre message a bien été receptionner !")
-    // Réinitialiser les valeurs
+// Fonction pour envoyer l'email
+const sendEmail = () => {
+const templateParams = {
+  name: name.value,
+  email: email.value,
+  message: message.value,
+};
+
+emailjs.send(
+  import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+  import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+  templateParams,
+  import.meta.env.VITE_APP_EMAILJS_USER_ID
+)
+  .then((response) => {
+    console.log('Message envoyé avec succès!', response.status, response.text);
+    // Réinitialiser le formulaire après l'envoi
     name.value = '';
     email.value = '';
     message.value = '';
-  }
+  })
+  .catch((error) => {
+    console.error('Erreur lors de l\'envoi du message:', error);
+  });
 };
 
 </script>
@@ -94,7 +108,7 @@ const valideData = () => {
 
     <div id="contact">
       <h3 class="formTitle">Formulaire de contact</h3>
-      <form action="mailto:xmr.pro.dev@gmail.com" method="post" enctype="text/plain" @submit.prevent="valideData">
+      <form @submit.prevent="sendEmail">
 
         <label for="name">Nom & prénom</label>
         <input v-model="name" type="text" name="name" id="name" required minlength="3" maxlength="20" placeholder="John Doe">
@@ -105,9 +119,7 @@ const valideData = () => {
         <label for="message">Message</label>
         <textarea v-model="message" name="message" id="message"></textarea>
 
-        <button class="submitForm" type="submit">
-          <a class="mail" href="mailto:xmr.pro.dev@gmail.com">Envoyez</a>
-        </button>
+        <button class="submitForm" type="submit">Envoyez</button>
 
       </form>
     </div>

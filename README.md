@@ -31,3 +31,18 @@ npm run dev
 ```sh
 npm run build
 ```
+# Pour installer `EmailJS` veuillez suivre les indications ci-dessous.
+
+Crée un fichier `.env` a la racine du projet et entrer ces information:
+
+VITE_APP_EMAILJS_USER_ID=YOUR_USER_ID
+VITE_APP_EMAILJS_SERVICE_ID=YOUR_SERVICE_ID
+VITE_APP_EMAILJS_TEMPLATE_ID=YOUR_TEMPLATE_ID
+
+Assurer vous d'avoir créer un compte chez `Emailjs`
+
+Enfin installer la bibliothéque qui vous permettra que tout cela fonctionne correctement:
+
+```sh
+npm install emailjs-com
+```
