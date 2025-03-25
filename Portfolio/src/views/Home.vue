@@ -119,7 +119,7 @@ emailjs.send(
         <input v-model="email" type="email" name="email" id="email" pattern=".+@gmail.com" required placeholder="example@exemple.com">
 
         <label for="message">Message</label>
-        <textarea v-model="message" name="message" id="message"></textarea>
+        <textarea v-model="message" name="message" id="message" required></textarea>
 
         <button class="submitForm" type="submit">Envoyez</button>
 
