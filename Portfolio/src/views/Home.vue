@@ -157,7 +157,7 @@ emailjs.send(
   width: 350px;
   text-align: center;
   color: #fff;
-  margin: 100px auto; /* Centre horizontalement */
+  margin: 100px auto;
 }
 
 label {
