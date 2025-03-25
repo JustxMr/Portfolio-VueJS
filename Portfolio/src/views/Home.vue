@@ -30,7 +30,8 @@ emailjs.send(
   import.meta.env.VITE_APP_EMAILJS_USER_ID
 )
   .then((response) => {
-    console.log('Message envoyé avec succès!', response.status, response.text);
+    console.log('Message envoyé avec succès !', response.status, response.text);
+    alert("Message envoyé avec succès ! ")
     // Réinitialiser le formulaire après l'envoi
     name.value = '';
     email.value = '';
@@ -38,6 +39,7 @@ emailjs.send(
   })
   .catch((error) => {
     console.error('Erreur lors de l\'envoi du message:', error);
+    alert("Une erreur inattendu c'est produit !")
   });
 };
 
